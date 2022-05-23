@@ -1,19 +1,19 @@
 from time import sleep as s
 import time
 import calendar
-from datetime import datetime as samay
-from datetime import date as tarik
+from datetime import datetime
+from datetime import date
 status = time.localtime()
 s(0.2)
-print(f"Day:  {samay.today().strftime('%A')} ")
-print(f"Date: {tarik.today()}")
+print(f"Day:  {datetime.today().strftime('%A')} ")
+print(f"Date: {date.today()}")
 print(f"Time: {status.tm_hour}hrs,{status.tm_min}min")
 print("\r")
 s(0.3)
 for x in range(20,0,-10):
  print(x*"*")
 s(0.1)
-print("built by Akash with <3(love)".center(65))
+print("built by Akash with <3(love)".center(66))
 for x in range(0,21,10):
  print(x*"*")
 s(0.6)
@@ -23,7 +23,6 @@ print("\r")
 s(0.3)
 
 opr=["(+)add","(-)sub","(÷)divide","(*)multiply","(%)percent","(^)power",'(!)factorial',"(√)sqrt"]
-
 
 #start
 class calc:
@@ -35,9 +34,8 @@ class calc:
 		return c
 	def div(a,b):
 		if b==0:
-			print("Cant divide by 0")
-			c=a
-			return c
+			print("##Cant divide by 0")
+			calc.behave()
 		c=a/b
 		return c
 	def mul(a,b):
@@ -55,42 +53,51 @@ class calc:
 			c=math.sqrt(a)
 			return c
 		else:
-			print("complex no. detected ")
-			print("NOTE: python represents i as--> j")
+			print("##complex no. detected ")
+			print("##NOTE: python represents i as--> j")
 			import cmath
 			c=cmath.sqrt(a)
 			return c
 	def fact(a):
 			import math
 			if a<0:
-				print("factorial isnt defined for negative no.	")
-				c=a
-				return c
+				print("##factorial isnt defined for negative and float no.	")
+				calc.behave()
 			a=abs(int(a))
 			c=math.factorial(a)
 			return c
 	
 	def id():
-		a= float(input("•enter 1st no: "))
-		print("\r")
+		a= input("•enter 1st no: ")
+		try:
+			a=float(a)
+		except ValueError or NameError:
+			calc.behave()
 		for f in opr:
 			print(f)
 		print("\r")
 		e= input("•enter operation: ")
-		print("\r")
-		if e=="√":
+		try:
+			e=int(e)
+			calc.behave()
+		except ValueError or NameError:
+			if e=="√":
 				d=calc.sqrt(a)
 				j=calc.choice(d)
 				return j
-	
-		elif e=="!":
-			d=calc.fact(a)
-			j=calc.choice(d)
-			return j
-		b= float(input("•enter 2nd no: "))
-		print("\r")
-		k=calc.op(e,a,b)
-		return k
+			elif e=="!":
+				d=calc.fact(a)
+				j=calc.choice(d)
+				return j
+			print("\r")
+			b= input("•enter 2nd no: ")
+			try:
+				b=float(b)
+				print("\r")
+				k=calc.op(e,a,b)
+				return k
+			except ValueError or NameError:
+					calc.behave()
 	def choice(d):
 		z=d
 		print("\r")
@@ -112,63 +119,84 @@ class calc:
 		k=input(f"•input --> ")
 		if k=="":
 			return z
-			
 		else:
-			o=calc.con(k,z)
-			return o
+			try:
+				z=calc.con(k,z)
+				return z
+			except ValueError or NameError:
+				return z
 			
+		
 	def op(e,a,b):
-		if e=="+":
-			d=calc.add(a,b)
-			j=calc.choice(d)
-			return j
-			
-		elif e=="-":
-			d=calc.sub(a,b)
-			j=calc.choice(d)
-			return j
-		elif e=="*":
-			d=calc.mul(a,b)
-			j=calc.choice(d)
-			return j
-		elif e=="÷":
-			d=calc.div(a,b)
-			j=calc.choice(d)
-			return j
-		elif e=="^":
-			d=calc.power(a,b)
-			j=calc.choice(d)
-			return j
-		elif e=="%":
-			d=calc.percent(a,b)
-			j=calc.choice(d)
-			return j
-			
-			
-	def con(e,a):
-		if e=="√":
-				d=calc.sqrt(a)
+		try:
+			if e=="+":
+				d=calc.add(a,b)
 				j=calc.choice(d)
 				return j
-	
-		elif e=="!":
-			d=calc.fact(a)
-			j=calc.choice(d)
+			elif e=="-":
+				d=calc.sub(a,b)
+				j=calc.choice(d)
+				return j
+			elif e=="*":
+				d=calc.mul(a,b)
+				j=calc.choice(d)
+				return j
+			elif e=="÷":
+				d=calc.div(a,b)
+				j=calc.choice(d)
+				return j
+			elif e=="^":
+				d=calc.power(a,b)
+				j=calc.choice(d)
+				return j
+			elif e=="%":
+				d=calc.percent(a,b)
+				j=calc.choice(d)
 			return j
-		print("\r")
-		b= float(input("•enter 2nd no: "))
-		print("\r")
-		n=calc.op(e,a,b)
-		return n
-		
-		def huh(e,a):
-			k=calc.con(e)
-			return k
-#end
+		except NameError or ValueError:
+			calc.behave()
 			
+	def con(e,a):
+				if e=="√":
+					d=calc.sqrt(a)
+					j=calc.choice(d)
+					return j
+				elif e=="!":
+					d=calc.fact(a)
+					j=calc.choice(d)
+					return j
+					print("\r")
+				b= input("•enter 2nd no: ")
+				try:
+					b=float(b)
+					print("\r")
+					h=calc.op(e,a,b)
+					return h
+				except ValueError or NameError:
+					calc.behave()
+					
+			
+			
+	def behave():
+			print("\r")
+			s(1)
+			print("•Please Input With Care!!")
+			s(1.4)
+			print("\r")
+			print("#Restarting....")
+			for b in range(3):
+				for x in range(4):
+					print(x*"*",end="")
+			s(1)
+			print("\r")
+			s(1)
+			print("\r")
+			v=calc.id()
+#end
+
 v=calc.id()
 if status.tm_hour <15 and status.tm_hour >6:
- wish = "MORNING"
+ wish = "DAY"
 elif status.tm_hour >15 and status.tm_hour <19:
  wish = "EVENING"
 
@@ -177,18 +205,16 @@ else:
 print("\r")
 for k in range(12):
 	print(k*".",end="")
-print("\r")
-print("\r")
-print("\r")
-print("\r")
+print(("\r")*(4))
 print(f"HAVE A GREAT  {wish}!!!".center(70))
-print("\r")
-print("\r")
-print('\r')
-print("~Akash".center(125))
+print(("\r")*(4))
+
+print("~Akash".center(127))
+
 for k in range(12):
 	print(k*".",end="")
 s(0.3)
+
 print("\r")
 
 
@@ -198,4 +224,4 @@ print("\r")
 
 
 		
-			
+		
