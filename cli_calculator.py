@@ -193,29 +193,29 @@ class calc:
 			print("\r")
 			v=calc.id()
 #end
-
-v=calc.id()
-if status.tm_hour <15 and status.tm_hour >6:
- wish = "DAY"
-elif status.tm_hour >15 and status.tm_hour <19:
- wish = "EVENING"
-
-else:
-    wish = "NIGHT"
-print("\r")
-for k in range(12):
-	print(k*".",end="")
-print(("\r")*(4))
-print(f"HAVE A GREAT  {wish}!!!".center(70))
-print(("\r")*(4))
-
-print("~Akash".center(127))
-
-for k in range(12):
-	print(k*".",end="")
-s(0.3)
-
-print("\r")
+try:
+	v=calc.id()
+	if status.tm_hour <15 and status.tm_hour >6:
+		 wish = "DAY"
+	elif status.tm_hour >15 and status.tm_hour <19:
+		 wish = "EVENING"
+	else:
+	   wish = "NIGHT"
+	   print("\r")
+	for k in range(12):
+	   print(k*".",end="")
+	print(("\r")*(4))
+	print(f"HAVE A GREAT  {wish}!!!".center(70))
+	print(("\r")*(4))
+	print("~Akash".center(127))
+	for k in range(12):
+	   	print(k*".",end="")
+	   	s(0.3)
+	print("\r")
+except OverflowError:
+	s(1)
+	print("\r")
+	print("##Dont try to overexceed calculations")
 
 
 
@@ -224,4 +224,4 @@ print("\r")
 
 
 		
-		
+			
